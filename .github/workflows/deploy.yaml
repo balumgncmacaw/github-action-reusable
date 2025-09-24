@@ -1,0 +1,35 @@
+name: Deploy
+
+run-name: ${{github.event.head_commit.message}}
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        required: true
+        type: string
+        description: Target deployment environment
+
+permissions:
+  id-token: write
+  contents: read
+  packages: read
+
+env:
+  NODE_VERSION: 20.11.1
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        run: echo "AWS auth done!"
+
+      - name: Deploy CDK app
+        run: echo "CDK deployment done for ${{ inputs.environment }}"
+          
+

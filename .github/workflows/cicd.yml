@@ -1,0 +1,31 @@
+name: CICD Pipeline
+
+run-name: ${{github.event.head_commit.message}}
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy_to_dev1:
+    name: Deploy to dev1
+    uses: ./.github/workflows/deploy.yaml
+    with:
+      environment: dev1
+
+  deploy_to_qa1:
+    name: Deploy to qa1
+    needs: deploy_to_dev1
+    uses: ./.github/workflows/deploy.yaml
+    with:
+      environment: qa1
+
+  deploy_to_sbx:
+    name: Deploy to sbx
+    needs: deploy_to_qa1
+    uses: ./.github/workflows/deploy.yaml
+    with:
+      environment: sbx
+
