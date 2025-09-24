@@ -10,10 +10,6 @@ on:
         type: string
         description: Target deployment environment
 
-permissions:
-  id-token: write
-  contents: read
-  packages: read
 
 env:
   NODE_VERSION: 20.11.1
