@@ -1,0 +1,9 @@
+name: Caller Workflow
+
+on: [push]
+
+jobs:
+  call-hello:
+    uses: ./.github/workflows/hello.yaml
+    with:
+      who: "Main Workflow"
